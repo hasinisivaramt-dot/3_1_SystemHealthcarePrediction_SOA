@@ -1,0 +1,86 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: ["mongo-data:/data/db"]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports: ["5672:5672", "15672:15672"]
+
+  api-gateway:
+    build: ./services/api-gateway
+    ports: ["8000:8000"]
+    depends_on: [auth-service, patient-service, doctor-service]
+
+  auth-service:
+    build: ./services/auth-service
+    ports: ["8001:8001"]
+    depends_on: [mongo]
+
+  patient-service:
+    build: ./services/patient-service
+    ports: ["8002:8002"]
+    depends_on: [mongo]
+
+  doctor-service:
+    build: ./services/doctor-service
+    ports: ["8003:8003"]
+    depends_on: [mongo]
+
+  hospital-service:
+    build: ./services/hospital-service
+    ports: ["8004:8004"]
+    depends_on: [mongo]
+
+  appointment-service:
+    build: ./services/appointment-service
+    ports: ["8005:8005"]
+    depends_on: [mongo, rabbitmq]
+
+  medical-record-service:
+    build: ./services/medical-record-service
+    ports: ["8006:8006"]
+    depends_on: [mongo]
+
+  ai-service:
+    build: ./services/ai-service
+    ports: ["8007:8007"]
+
+  recommendation-service:
+    build: ./services/recommendation-service
+    ports: ["8008:8008"]
+
+  queue-service:
+    build: ./services/queue-service
+    ports: ["8009:8009"]
+    depends_on: [redis, rabbitmq]
+
+  notification-service:
+    build: ./services/notification-service
+    ports: ["8010:8010"]
+    depends_on: [rabbitmq]
+
+  admin-service:
+    build: ./services/admin-service
+    ports: ["8011:8011"]
+    depends_on: [mongo]
+
+  audit-service:
+    build: ./services/audit-service
+    ports: ["8012:8012"]
+    depends_on: [mongo]
+
+  frontend:
+    build: ./frontend
+    ports: ["5173:5173"]
+    depends_on: [api-gateway]
+
+volumes:
+  mongo-data:

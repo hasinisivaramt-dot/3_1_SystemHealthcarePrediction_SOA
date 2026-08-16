@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medical-record-service
+  namespace: healix
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: medical-record-service
+  template:
+    metadata:
+      labels:
+        app: medical-record-service
+    spec:
+      containers:
+        - name: medical-record-service
+          image: healix/medical-record-service:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: medical-record-service-config

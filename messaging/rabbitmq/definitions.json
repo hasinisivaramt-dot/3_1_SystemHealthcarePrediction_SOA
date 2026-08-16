@@ -1,0 +1,14 @@
+{
+  "queues": [
+    { "name": "user.registered" },
+    { "name": "doctor.approved" },
+    { "name": "appointment.created" },
+    { "name": "appointment.cancelled" },
+    { "name": "appointment.completed" },
+    { "name": "prediction.generated" },
+    { "name": "report.uploaded" },
+    { "name": "prescription.created" },
+    { "name": "queue.updated" },
+    { "name": "model.drift.detected" }
+  ]
+}

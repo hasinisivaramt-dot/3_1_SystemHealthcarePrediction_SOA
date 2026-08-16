@@ -1,0 +1,8 @@
+# Production overrides: real image tags from the container registry,
+# resource limits, restart policies, and secrets pulled from the
+# platform secret manager instead of .env files.
+version: "3.9"
+services:
+  api-gateway:
+    image: registry.example.com/healix/api-gateway:latest
+    restart: unless-stopped

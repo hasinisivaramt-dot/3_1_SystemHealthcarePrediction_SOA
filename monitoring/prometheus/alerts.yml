@@ -1,0 +1,13 @@
+groups:
+  - name: healix-alerts
+    rules:
+      - alert: HighAPILatency
+        expr: http_request_duration_seconds{quantile="0.95"} > 1
+        for: 5m
+        labels: { severity: warning }
+        annotations: { summary: "95th percentile API latency above 1s" }
+      - alert: ModelDriftDetected
+        expr: model_drift_score > 0.25
+        for: 10m
+        labels: { severity: critical }
+        annotations: { summary: "Data drift threshold exceeded for a production model" }

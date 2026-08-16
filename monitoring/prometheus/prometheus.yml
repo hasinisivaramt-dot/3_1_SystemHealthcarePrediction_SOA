@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "api-gateway"
+    static_configs: [{ targets: ["api-gateway:8000"] }]
+  - job_name: "ai-service"
+    static_configs: [{ targets: ["ai-service:8007"] }]
+  - job_name: "appointment-service"
+    static_configs: [{ targets: ["appointment-service:8005"] }]
+  - job_name: "queue-service"
+    static_configs: [{ targets: ["queue-service:8009"] }]

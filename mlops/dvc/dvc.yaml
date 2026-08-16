@@ -1,0 +1,13 @@
+stages:
+  preprocess:
+    cmd: python ../../ai-ml/disease-risk-model/preprocessing/run.py
+    deps: [../../ai-ml/disease-risk-model/data]
+    outs: [../../ai-ml/disease-risk-model/data/processed]
+  train:
+    cmd: python ../../ai-ml/disease-risk-model/training/train.py
+    deps: [../../ai-ml/disease-risk-model/data/processed]
+    outs: [../../ai-ml/disease-risk-model/models]
+  evaluate:
+    cmd: python ../../ai-ml/disease-risk-model/evaluation/evaluate.py
+    deps: [../../ai-ml/disease-risk-model/models]
+    metrics: [metrics.json]

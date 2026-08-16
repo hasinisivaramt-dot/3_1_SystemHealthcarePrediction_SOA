@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AppointmentCreated",
+  "type": "object",
+  "required": ["appointment_id", "patient_id", "doctor_id", "scheduled_at"],
+  "properties": {
+    "appointment_id": { "type": "string" },
+    "patient_id": { "type": "string" },
+    "doctor_id": { "type": "string" },
+    "scheduled_at": { "type": "string", "format": "date-time" }
+  }
+}
