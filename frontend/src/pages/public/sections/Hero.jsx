@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Check } from 'lucide-react'
+import { Check, Video } from 'lucide-react'
 import Button from '../../../components/buttons/Button'
 import ConfidenceRing from '../../../components/charts/ConfidenceRing'
 
@@ -88,6 +88,26 @@ export default function Hero() {
             </svg>
           </div>
 
+          {/* Animated data flow connection path */}
+          <svg className="absolute inset-0 pointer-events-none hidden md:block" style={{ zIndex: 0 }} viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="var(--cyan)" stopOpacity="0.4" />
+                <stop offset="50%" stopColor="var(--glow-cyan)" stopOpacity="0.75" />
+                <stop offset="100%" stopColor="var(--glow-purple)" stopOpacity="0.4" />
+              </linearGradient>
+            </defs>
+            <motion.path
+              d="M 16,12 C 12,25 9,55 9,70 C 12,85 28,70 46,52 C 62,35 76,25 86,20 C 96,15 85,55 85,89"
+              fill="none"
+              stroke="url(#flowGradient)"
+              strokeWidth="1.5"
+              strokeDasharray="8 6"
+              animate={{ strokeDashoffset: [0, -28] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 3 }}
+            />
+          </svg>
+
           <motion.div className="float-card" style={{ top: '2%', left: '-4%', width: 200 }} animate={float.animate} transition={{ ...float.transition, delay: 0.2 }}>
             <div className="fc-label">AI Health Analysis</div>
             <div className="text-[13px] font-semibold" style={{ color: 'var(--navy)' }}>Analyzing symptoms…</div>
@@ -106,6 +126,28 @@ export default function Hero() {
             <div className="fc-label">Preliminary Risk</div>
             <div className="flex justify-center my-1"><ConfidenceRing percent={78} size={74} strokeWidth={7} label="" /></div>
             <span className="text-[11.5px] font-semibold px-2.5 py-0.5 rounded-full inline-block" style={{ color: '#B8860B', background: '#FFF6E0' }}>Moderate</span>
+          </motion.div>
+
+          <motion.div
+            className="float-card"
+            style={{ top: '42%', left: '28%', width: 175 }}
+            animate={float.animate}
+            transition={{ ...float.transition, delay: 1.1 }}
+          >
+            <div className="fc-label">Consultation Mode</div>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="flex items-center justify-center w-5 h-5 rounded" style={{ backgroundColor: 'rgba(63, 199, 217, 0.15)', color: 'var(--cyan)' }}>
+                <Video size={12} />
+              </span>
+              <div className="text-[13px] font-semibold" style={{ color: 'var(--navy)' }}>Online consultation</div>
+            </div>
+            <div className="flex items-center gap-1.5 text-[12px] mt-2" style={{ color: 'var(--ink-soft)' }}>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: 'var(--green)' }} />
+              Suitable for remote care
+            </div>
+            <div className="text-[9px] mt-2 pt-1.5 border-t text-center" style={{ borderColor: 'var(--line-soft)', color: 'var(--ink-faint)', fontStyle: 'italic' }}>
+              Simulation only · Not medical advice
+            </div>
           </motion.div>
 
           <motion.div className="float-card" style={{ top: '8%', right: '-6%', width: 196 }} animate={float.animate} transition={{ ...float.transition, delay: 0.8 }}>
